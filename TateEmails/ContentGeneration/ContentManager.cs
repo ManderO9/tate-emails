@@ -57,7 +57,6 @@ public class ContentManager
         var latestEmail = orderedEmails.First();
         var oldestEmail = orderedEmails.Last();
 
-        // TODO: add an emails link to the top bar with a link to the latest email
 
         return $$"""
         ---
@@ -66,7 +65,7 @@ public class ContentManager
 
         hero:
           name: "Tate Newsletter"
-          text: "Stories that enspire the masses"
+          text: "Stories that inspire the masses"
           tagline: You can find a list of all the emails that Andrew Tate sends in his Newsletter
           actions:
             - theme: brand
@@ -119,7 +118,7 @@ public class ContentManager
             if(i == emails.Count - 5) priority = 0.6;
 
 
-            var fileName = email.CreatedDate.ToString("yyyy-MM-dd") + ".html";
+            var fileName = email.CreatedDate.ToString("yyyy-MM-dd-HH-mm-ss") + ".html";
 
             var year = email.CreatedDate.Year.ToString();
             var month = email.CreatedDate.ToString("MMMM").ToLower();
@@ -149,7 +148,7 @@ public class ContentManager
 
     private string GetFilePath(Email email)
     {
-        var fileName = email.CreatedDate.ToString("yyyy-MM-dd") + ".md";
+        var fileName = email.CreatedDate.ToString("yyyy-MM-dd-HH-mm-ss") + ".md";
 
         var year = email.CreatedDate.Year.ToString();
         var month = email.CreatedDate.ToString("MMMM").ToLower();
@@ -167,7 +166,7 @@ public class ContentManager
         {
 
             var fileContent = email.RenderMarkdownPage();
-            var fileName = email.CreatedDate.ToString("yyyy-MM-dd") + ".md";
+            var fileName = email.CreatedDate.ToString("yyyy-MM-dd-HH-mm-ss") + ".md";
 
             var year = email.CreatedDate.Year.ToString();
             var month = email.CreatedDate.ToString("MMMM").ToLower();
@@ -268,7 +267,7 @@ public class ContentManager
         //foreach(var email in emails)
         //{
 
-        //    var fileName = email.CreatedDate.ToString("yyyy-MM-dd") + ".html";
+        //    var fileName = email.CreatedDate.ToString("yyyy-MM-dd-HH-mm-ss") + ".html";
 
         //    var year = email.CreatedDate.Year.ToString();
         //    var month = email.CreatedDate.ToString("MMMM").ToLower();

@@ -1,10 +1,22 @@
 ﻿
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 using TateEmails;
 
 
 var currentFolder = GetCurrentFolder();
+
+if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+{
+    var json = File.ReadAllText(Path.Combine(currentFolder, ".env"));
+    var env = JsonDocument.Parse(json);
+
+    foreach(var item in env.RootElement.EnumerateObject())
+    {
+        Environment.SetEnvironmentVariable(item.Name, item.Value.ToString());
+    }
+}
 
 
 var emailReader = new EmailReader();
