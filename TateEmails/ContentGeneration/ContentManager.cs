@@ -204,10 +204,10 @@ public class ContentManager
         var maxDate = emails.Max(x => x.CreatedDate);
 
         var yearOfItem = links.Items.FirstOrDefault(x => x.Text == maxDate.Year.ToString());
-        var monthOfItem = yearOfItem.Items.FirstOrDefault(x => x.Text == maxDate.ToString("MMMM").ToLower());
+        var monthOfItem = yearOfItem!.Items!.FirstOrDefault(x => x.Text == maxDate.ToString("MMMM").ToLower());
 
         yearOfItem.Collapsed = false;
-        monthOfItem.Collapsed = false;
+        monthOfItem!.Collapsed = false;
 
 
         return links;
@@ -216,7 +216,7 @@ public class ContentManager
     public List<Email> GetEmailsList(string inputFilePath)
     {
 
-        var emails = JsonSerializer.Deserialize<List<Email>>(File.ReadAllText(inputFilePath));
+        var emails = JsonSerializer.Deserialize<List<Email>>(File.ReadAllText(inputFilePath))!;
 
         // Order the mails by creation date
         return emails.OrderBy(x => x.CreatedDate).ToList();
@@ -246,7 +246,7 @@ public class ContentManager
 
     public void AddEmail(string emailsFilePath, Email email)
     {
-        var emails = JsonSerializer.Deserialize<List<Email>>(File.ReadAllText(emailsFilePath));
+        var emails = JsonSerializer.Deserialize<List<Email>>(File.ReadAllText(emailsFilePath))!;
 
         if(emails.Any(x => x.CreatedDate.Date == email.CreatedDate.Date))
         {

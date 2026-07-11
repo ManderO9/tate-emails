@@ -72,6 +72,12 @@ public class EmailReader
 
             var uids = await client.Inbox.SearchAsync(SearchQuery.FromContains("tate@cobratate.com").And(SearchQuery.SentSince(lastDate.AddDays(1))));
 
+            //var uids = await client.Inbox.SearchAsync(
+            //    SearchQuery.SentSince(lastDate.AddDays(1)).And(
+            //        SearchQuery.FromContains("tate@cobratate.com").Or(SearchQuery.FromContains("cobracommand@substack.com")))
+            //    );
+
+            
             foreach(var id in uids)
             {
                 var message = await client.Inbox.GetMessageAsync(id);
@@ -229,8 +235,8 @@ public class EmailReader
 
 file class EmailMessage
 {
-    public string Subject { get; set; }
+    public string Subject { get; set; } = string.Empty;
     public DateTimeOffset TimeSent { get; set; }
-    public string HtmlContent { get; set; }
-    public string TextContent { get; set; }
+    public string HtmlContent { get; set; } = string.Empty;
+    public string TextContent { get; set; } = string.Empty;
 }
